@@ -105,6 +105,24 @@
     cursor: pointer;
   }
   
+  .form-gender{
+    display:flex;
+    font-size: 14px;
+  }
+
+.form-gender--radio{
+  display:flex;
+  align-items: center;
+}
+
+.form-gender--radio input{
+  margin-right: 4px;
+}
+
+.form-gender--radio label{
+  margin-right: 12px;
+}
+
   .form-submit:hover {
     background-color: #1ac7b6;
   }

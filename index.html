@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form Register</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <div class="main">
@@ -64,24 +64,84 @@
           />
           <span class="form-message"></span>
         </div>
+        <div class="form-group">
+            <label for="province" class="form-label">Tỉnh/Thành Phố</label>
+            <select id="province" name="province" class="form-control">
+              <option value="">--Tỉnh/TP--</option>
+              <option value="Hà Nội">Hà Nội</option>
+              <option value="Lào Cai">Lào Cai</option>
+              <option value="Hồ Chí Mi">Hồ Chí Minh</option>
+            </select>
+          <span class="form-message"></span>
+        </div>
+        <div class="form-group">
+          <label for="gender_confirmation" class="form-label">Gender</label>
+          <div class="form-gender">
+            <div class="form-gender--radio">
+              <input
+                id="gender--male"
+                type="radio"
+                name="gender"
+                class="form-control"
+                value="male"
+              />
+              <label for="gender--male">Male</label>
+            </div >
+            <div class="form-gender--radio">
+              <input
+              id="gender--female"
+                type="radio"
+                name="gender"
+                class="form-control"
+                value="female"
+              />
+              <label for="gender--female">Female</label>
+            </div >
+            <div class="form-gender--radio">
+              <input
+              id="gender--other"
+                type="radio"
+                name="gender"
+                class="form-control"
+                value="other"
+                checked
+              />
+              <label for="gender--female">Other</label>
+            </div >
+          </div>
+          <span class="form-message"></span>
+        </div>
 
         <button class="form-submit">Đăng ký</button>
       </form>
     </div>
     <script src="./assets/js/main.js"></script>
     <script>
-      // User Setting 
+      // User Setting
       Validator({
-        form:"#form-1",
-        errorSelector:".form-message",
-        rules:[
+        form: '#form-1',
+        parentForm: '.form-group',
+        errorSelector: '.form-message',
+        rules: [
           Validator.isRequired('#fullname'),
-          Validator.isEmail('#email'),
-          Validator.isGreaterMin('#password',6),
-          Validator.isEqual('#password_confirmation')
+          Validator.isRequired('#email', `Please enter your email`),
+          Validator.isEmail('#email', `Your is email is wrong form!`),
+          Validator.isGreaterMin('#password', 6),
+          Validator.isRequired(
+            '#password_confirmation',
+            `Please confirm your password!`
+          ),
+          Validator.isEqual(
+            '#password_confirmation',
+            "The entered passwords do not match. Let's try again."
+          ),
+          Validator.isRequired('input[name="gender"]'),
+          Validator.isRequired('#province','Chọn thành phố của bạn')
         ],
-        animate:"Smooth"
-      });
+        onSubmit: data => {
+          console.log(data)
+        }
+      })
     </script>
   </body>
 </html>
